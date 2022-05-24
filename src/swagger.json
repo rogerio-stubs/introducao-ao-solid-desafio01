@@ -1,0 +1,179 @@
+{
+ "openapi": "3.0.0",
+ "info": {
+     "title": "Introdução ao SOLID - desafio 01",
+     "description": "This is an API",
+     "version": "1.0.0",
+     "contact": {
+         "email": "rogerio.stubs@gmail.com"
+     }
+ },
+
+ "paths": {
+     "/users" : {
+         "post": {
+             "tags": ["User"],
+             "summary": "Cria um novo usuário",
+             "requestBody": {
+                 "content": {
+                     "application/json": {
+                         "description": "Campos obrigatórios para criação de um usuário",
+                         "schema": {
+                             "type": "object",
+                             "properties": {
+                                 "email": {
+                                    "type": "string"
+                                 },
+                                 "name": {
+                                     "type": "string"
+                                 }
+                             },
+                             "example": {
+                                 "email": "myEmail@email.com",
+                                 "name": "My Name"
+                             }
+                         }
+                     }
+                 }
+             },
+             "responses": {
+                 "201": {
+                     "description": "Operação realizada com sucesso!",
+                     "content": {
+                         "application/json": {
+                             "schema": {
+                                 "properties": {
+                                     "email": {
+                                         "type": "string",
+                                         "format": "rogerio.stubs@gmail.com"
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 },
+                 "500": {
+                     "description": "Email já está sendo utilizado."
+                 }
+             }
+         }
+     },
+     "/users/{user_id}": {
+         "get": {
+             "tags": ["User"],
+             "summary": "Retorna um usuário específico",
+             "description": "Retorna um usuário com base em seu ID",
+             "parameters": [
+                {
+                  "name": "user_id",
+                  "in": "path",
+                  "type": "uuid",
+                  "required": true
+                }
+              ],
+             "responses": {
+                 "200": {
+                     "description": "Success",
+                     "content": {
+                         "application/json": {
+                             "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "uuid"
+                                    },
+                                    "admin": {
+                                        "type": false
+                                    }
+                                }
+                             }
+                         }
+                     }
+                 },
+                 "400": {
+                     "error": "User not found"
+                 }
+             }
+         }
+     },
+     "/users/{user_id}/admin/" : {
+        "patch": {
+            "tags": ["User"],
+            "summary": "Torna um usuário administrador",
+            
+            "responses": {
+                "200": {
+                    "description": "Operação realizada com sucesso!",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "Rogério Stubs"
+                                    },
+                                    "admin": {
+                                        "type": "boolean",
+                                        "format": "true"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "rogerio.stubs@gmail.com"
+                                    },
+                                    "created_at": {
+                                        "type": "Date",
+                                        "format": "2022/12/12"
+                                    },
+                                    "updated_at": {
+                                        "type": "Date",
+                                        "format": "2022/12/12"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/users/" : {
+        "get": {
+            "tags": ["User"],
+            "summary": "Retorna uma lista de usuários",
+            
+            "responses": {
+                "200": {
+                    "description": "Operação realizada com sucesso!",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "Rogério Stubs"
+                                    },
+                                    "admin": {
+                                        "type": "boolean",
+                                        "format": "true"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "rogerio.stubs@gmail.com"
+                                    },
+                                    "created_at": {
+                                        "type": "Date",
+                                        "format": "2022/12/12"
+                                    },
+                                    "updated_at": {
+                                        "type": "Date",
+                                        "format": "2022/12/12"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+        }
+    }
+ }
+ }
+}
